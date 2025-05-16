@@ -1,0 +1,9 @@
+# Example Kubernetes Pod manifest
+apiVersion: v1
+kind: Pod
+metadata:
+  name: example-pod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
