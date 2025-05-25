@@ -17,8 +17,8 @@ spec:
       containers:
       - image: httpd
         name: httpd
-  strategy
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 1
+  strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 1
+        maxSurge: 1
