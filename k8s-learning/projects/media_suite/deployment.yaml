@@ -36,12 +36,10 @@ spec:
         - mountPath: /config
           name: media
         - mountPath: /tv
-          subPath: tv
           name: media
         - mountPath: /movies
-          subPath: movies
           name: media
       volumes:
         - name: media
-          emptyDir:
-            sizeLimit: 500Mi
+          persistentVolumeClaim:
+            claimName: mediapvc
