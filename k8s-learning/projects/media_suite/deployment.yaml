@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  namespace: mediasuite
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyfin
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      containers:
+      - name: jellyfin
+        image: lscr.io/linuxserver/jellyfin:latest
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Africa/Blantyre"
+        ports:
+        - containerPort: 8096
+          protocol: TCP
+        - containerPort: 8920
+          protocol: TCP
+        - containerPort: 7359
+          protocol: UDP
+        - containerPort: 1900
+          protocol: UDP
+        volumeMounts:
+        - mountPath: /config
+          name: media
+        - mountPath: /tv
+          subPath: tv
+          name: media
+        - mountPath: /movies
+          subPath: movies
+          name: media
+      volumes:
+        - name: media
+          emptyDir:
+            sizeLimit: 500Mi
