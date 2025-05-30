@@ -33,7 +33,7 @@ spec:
         - containerPort: 1900
           protocol: UDP
         volumeMounts:
-        - mountPath: /config
+        - mountPath: /config/jellyfin
           name: media
         - mountPath: /tv
           name: media

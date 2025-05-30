@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: file
+  name: file
+  namespace: mediasuite 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: file
+  template:
+    metadata:
+      labels:
+        app: file
+    spec:
+      containers:
+        - name: file
+          image: hurlenko/filebrowser
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: FB_BASEURL
+              value: "/filebrowser"
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: media
+              mountPath: /config/file
+            - name: media
+              mountPath: /mnt/data
+      volumes:
+        - name: media
+          emptyDir:
+            sizeLimit: 500Mi
